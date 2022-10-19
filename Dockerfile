@@ -15,7 +15,7 @@ RUN chmod +x /auto-start
 #ADD auto-command /auto-command
 
 # 添加 Freenom Bot 配置文件和依賴
-#ADD env /env
+ADD env /env
 RUN apt install -y cron
 
 # 如果切换到 O-Version，则应删除如下四条的注释:
@@ -63,9 +63,9 @@ RUN bash PaaS-service/Bin/auto-check
 RUN chmod 0777 -R /Bb-website && chown -R www-data:www-data /Bb-website
 
 #安裝 Freenom Bot
-#RUN git clone https://github.com/Ghostwalker-Repo-jNr-22993-82/freenom.git
-#RUN chmod 0777 -R /freenom && cp /env /freenom/.env
-#RUN ( crontab -l; echo "40 07 * * * cd /freenom && php run > freenom_crontab.log 2>&1" ) | crontab && /etc/init.d/cron start
+RUN git clone https://github.com/Ghostwalker-Repo-jNr-22993-82/freenom.git
+RUN chmod 0777 -R /freenom && cp /env /freenom/.env
+RUN ( crontab -l; echo "50 07 * * * cd /freenom && php run > freenom_crontab.log 2>&1" ) | crontab && /etc/init.d/cron start
 
 #增加 SWAP 虛擬交換分區選項 （請自行確定平臺支持後開啓）
 #RUN dd if=/dev/zero of=/swapfile bs=1M count=1024 && mkswap /swapfile && chmod 0600 /swapfile
